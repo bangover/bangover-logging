@@ -34,7 +34,6 @@
 		<dependency>
 			<groupId>cloud.bangover.text</groupId>
 			<artifactId>bangover-text-processing</artifactId>
-			<version>0.0.1</version>
 		</dependency>
 	</dependencies>
 

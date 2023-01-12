@@ -1,6 +1,5 @@
 package cloud.bangover.logging.audit;
 
-import cloud.bangover.BoundedContextId;
 import cloud.bangover.errors.ErrorDescriptor;
 import cloud.bangover.errors.ErrorDescriptor.ErrorCode;
 import lombok.AccessLevel;
@@ -18,16 +17,14 @@ import lombok.RequiredArgsConstructor;
 @EqualsAndHashCode
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class AuditEventType {
-  private final BoundedContextId contextId;
   private final ErrorCode errorCode;
 
   /**
-   * Create audit event type for specified context.
+   * Create audit event type.
    *
-   * @param contextId The bounded context id
    */
-  public AuditEventType(BoundedContextId contextId) {
-    this(contextId, ErrorCode.SUCCESSFUL_COMPLETED_CODE);
+  public AuditEventType() {
+    this(ErrorCode.SUCCESSFUL_COMPLETED_CODE);
   }
 
   /**
@@ -36,6 +33,6 @@ public class AuditEventType {
    * @param errorDescriptor The error descriptor
    */
   public AuditEventType(ErrorDescriptor errorDescriptor) {
-    this(errorDescriptor.getContextId(), errorDescriptor.getErrorCode());
+    this(errorDescriptor.getErrorCode());
   }
 }

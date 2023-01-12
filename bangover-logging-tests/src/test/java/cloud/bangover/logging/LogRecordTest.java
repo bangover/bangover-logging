@@ -1,6 +1,5 @@
 package cloud.bangover.logging;
 
-import cloud.bangover.BoundedContextId;
 import cloud.bangover.errors.ErrorDescriptor;
 import cloud.bangover.errors.ErrorDescriptor.ErrorCode;
 import cloud.bangover.errors.ErrorDescriptor.ErrorSeverity;
@@ -22,7 +21,6 @@ public class LogRecordTest {
   private static final String RANDOM_TEXT = "RANDOM TEXT";
   private static final String PARAM_KEY = "KEY";
   private static final String PARAM_VALUE = "VALUE";
-  private static final BoundedContextId ERROR_CONTEXT = BoundedContextId.createFor("ERRCTX");
   private static final ErrorCode ERROR_CODE = ErrorCode.createFor(100L);
 
   @DataPoints("levelsData")
@@ -101,7 +99,7 @@ public class LogRecordTest {
   }
 
   private ErrorDescriptor createStubErrorDescriptor() {
-    return new StubErrorDescriptor(ERROR_CONTEXT, ERROR_CODE, ErrorSeverity.INCIDENT)
+    return new StubErrorDescriptor(ERROR_CODE, ErrorSeverity.INCIDENT)
         .withDetailsParameter(PARAM_KEY, PARAM_VALUE);
   }
 }

@@ -1,6 +1,5 @@
 package cloud.bangover.logging.audit;
 
-import cloud.bangover.BoundedContextId;
 import cloud.bangover.errors.ErrorDescriptor;
 import cloud.bangover.errors.ErrorDescriptor.ErrorCode;
 import cloud.bangover.logging.Level;
@@ -43,15 +42,13 @@ public class ServiceAuditEvent {
   /**
    * Create the service audit event for the error descriptor.
    *
-   * @param contextId           The context id
    * @param auditLevel          The log level
    * @param messageTemplate     The message text template
    * @param auditParameterNames The audit parameter names, passed to the event
    */
-  public ServiceAuditEvent(BoundedContextId contextId, Level auditLevel,
-      TextTemplate messageTemplate, Collection<String> auditParameterNames) {
-    this(new AuditEventType(contextId), new LogRecord(auditLevel, messageTemplate),
-        auditParameterNames);
+  public ServiceAuditEvent(Level auditLevel, TextTemplate messageTemplate,
+      Collection<String> auditParameterNames) {
+    this(new AuditEventType(), new LogRecord(auditLevel, messageTemplate), auditParameterNames);
   }
 
   private ServiceAuditEvent(AuditEventType auditEvent, LogRecord auditLogRecord,
@@ -67,15 +64,6 @@ public class ServiceAuditEvent {
     this.auditEventType = proto.auditEventType;
     this.auditParameterNames = proto.auditParameterNames;
     this.auditLogRecord = proto.auditLogRecord;
-  }
-
-  /**
-   * Get the bounded context id.
-   *
-   * @return The bounded context id
-   */
-  public BoundedContextId getContextId() {
-    return auditEventType.getContextId();
   }
 
   /**
